@@ -3,9 +3,16 @@ const $ = document.querySelector.bind(document);
 function showImage(event)
 {
     var breed = this.innerText;
+    var priorSelected = $('.selected');
+    if(priorSelected){
+        priorSelected.className= '';
+    }
+    this.className.add('selected');
     fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
     .then(r => r.json)
-    .then(data => console.log( data));
+    .then(data => {
+        $('#dog'.src = data.message);
+    });
 }
 
 function createButton(txt)
