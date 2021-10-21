@@ -1,13 +1,13 @@
-body{
+#body{
     background-color: beige;
     color: #aaa;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-header{
+#header{
     font-size: 40pt;
 }
 
-button{
+#button{
     background-color: transparent;
 }
