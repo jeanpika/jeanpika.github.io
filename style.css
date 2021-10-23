@@ -1,13 +1,26 @@
-#body{
+body{
     background-color: beige;
     color: #aaa;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-#header{
-    font-size: 40pt;
+.header{
+    font-size: 70pt;
+    color: blueviolet;
 }
 
-#button{
+button{
     background-color: transparent;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.selected{
+    background-color: #eee;
+
+}
+
+.dc{
+    text-align: center;
 }

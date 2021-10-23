@@ -7,19 +7,22 @@ function showImage(event)
     if(priorSelected){
         priorSelected.className= '';
     }
-    this.className.add('selected');
+    this.className = 'selected';
     fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
-    .then(r => r.json)
+    .then(r => r.json())
     .then(data => {
-        $('#dog'.src = data.message);
+        console.log(data.message, breed)
+        $('#dog').src = data.message;
     });
 }
 
 function createButton(txt)
-var btn = document.createElement('button');
-btn.innerText = txt;
-$('#buttons').appendChild(btn);
-btn.onclick = showImage;
+{
+    var btn = document.createElement('button');
+    btn.innerText = txt;
+    $('#buttons').appendChild(btn);
+    btn.onclick = showImage;
+}
 
 window.onload = function()
 {
