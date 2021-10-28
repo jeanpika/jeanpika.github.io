@@ -14,6 +14,7 @@ function showImage(event)
         console.log(data.message, breed)
         $('#dog').src = data.message;
     });
+
 }
 
 function createButton(txt)
@@ -32,4 +33,39 @@ window.onload = function()
         Object.keys(data.message)
         .forEach(createButton);
     });
+
+    onLogin(user => {
+        if(user){
+            $('#addCommentDiv').style.display='block';
+            $('#loginDiv').style.display = 'none';
+        }else{
+            $('#addCommentDiv').style.display='block';
+            $('#loginDiv').style.display = 'none';
+        }
+        });
+
+    $('#loginLink').onclick = function(){
+        $('#loginDiv').style.display = 'block';
+        $('#signupDiv').style.display = 'none';
+    }
+
+    $('#signUpLink').onclick = function(){
+        $('#loginDiv').style.display = 'none';
+        $('#signupDiv').style.display = 'block';
+    }
+
+    $('#loginBtn').onclick = function(){
+        login($('#email').value, $('#password').value)
+        .catch(err => $('.error').innerText =err.message);
+    }
+
+    $('#registerBtn').onclick = function(){
+        login($('#emailReg').value, $('#passwordReg').value)
+        .catch(err => $('.error').innerText =err.message);
+    }
+
+    $('#addCommentBtn').onclick = function(){
+        addComment($('#newComment').value)
+        .catch(err => $('.error').innerText =err.message);
+    }
 }

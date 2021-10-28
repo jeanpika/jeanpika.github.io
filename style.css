@@ -24,3 +24,12 @@ button{
 .dc{
     text-align: center;
 }
+
+#comments{
+    width: 80%;
+    border-radius: 5px;
+}
+
+.error{
+    color: red;
+}

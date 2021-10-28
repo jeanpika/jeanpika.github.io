@@ -3,6 +3,7 @@
      <head>
             <script src = "main.js"></script>
             <link rel="stylesheet" href="style.css">
+            <script src = "firebase.mjs" type="module"></script>
     </head>
             
     <body>
@@ -15,6 +16,36 @@
                 <img id ="dog"> </img>
             </div>
             
+            <div id="comments">
+                <br>
+
+                <div id ="signupDiv" style="display: none;">
+                    register to add a comment:
+                    email: <input id="emailRg">
+                    password: <input type="password" id="passwordReg">
+                    <button id="registerBtn">Register</button>
+                    <br>
+                    Already a User?? <a id ="LoginLink">Click this link to sign in</a>
+                </div>
+
+                <div id ="loginDiv" style="display: none;">
+                    log in to add a comment:
+                    <br>
+                    email: <input id="email">
+                    password:<input type="password" id="password">
+                    <button id="loginBtn">Log in</button>
+                    <br>
+                    New User?? <a id ="signupLink">Click this link to signup</a>
+            </div>
+
+            <div id="addCommentDiv" style="display: none;">
+                <textarea name="" id="newComment" cols="30" rows="3"></textarea>
+                <button id="addCommentBtn">Add a Comment</button>
+                <br>
+                <a id="slattbratha">Click here to log out.</a>
+            </div>
             
+            <div class="error"></div>
+
     </body>
 </html>
