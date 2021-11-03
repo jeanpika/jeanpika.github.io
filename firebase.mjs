@@ -2,7 +2,7 @@
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js";
-  import{getFirestore, addDoc, getDocs, collection} from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+  import{getFirestore, addDoc, getDocs, collection, serverTimestamp} from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,7 +18,7 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-    window.auth = getAuth();
+   window.auth = getAuth();
     const db = getFirestore(app);
 //////////////////////////////////////////////////////
 //expose functionality for auth
@@ -36,7 +36,7 @@ window.signup = function(email,password){
  }
 
  window.logout = function(){
-     auth.signout();
+     auth.signOut();
  }
 
  window.onLogin = function(f){
@@ -47,10 +47,13 @@ window.signup = function(email,password){
  //////////////////////////////////////////////////
  // expose functionality for database
 
- window.addComent = function(comment){
-    addDoc(collection(db, "comments"), {comment});
+ window.addComment = function(comment){
+    return addDoc(collection(db, "comments"), 
+    {comment, posted: serverTimestamp()});
  }
 
- window.forEachComment = function(f){
-
+ window.forEachComment = async function( f ){
+   var docs = await getDocs( collection(db, "comments") );
+   console.log(docs);
+   docs.forEach( doc => f(doc.data()) );
 }

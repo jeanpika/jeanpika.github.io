@@ -25,6 +25,13 @@ function createButton(txt)
     btn.onclick = showImage;
 }
 
+function createComment( commentDoc ){
+    var div = document.createElement('div');
+    div.innerText = commentDoc.comment;
+    $('#comments').appendChild(div);
+    div.className = 'comment';
+}
+
 window.onload = function()
 {
     this.fetch(`https://dog.ceo/api/breeds/list/all`)
@@ -34,15 +41,23 @@ window.onload = function()
         .forEach(createButton);
     });
 
-    onLogin(user => {
+     // check if user is logged in
+     onLogin( user => {
         if(user){
-            $('#addCommentDiv').style.display='block';
+            //user just logged in
+            $('#addCommentDiv').style.display = 'block';
             $('#loginDiv').style.display = 'none';
+            $('#signupDiv').style.display = 'none';
         }else{
-            $('#addCommentDiv').style.display='block';
-            $('#loginDiv').style.display = 'none';
+            //user just logged out
+            $('#loginDiv').style.display = 'block';
+            $('#addCommentDiv').style.display = 'none';
         }
-        });
+    });
+
+        // show comments
+        forEachComment( createComment );
+
 
     $('#loginLink').onclick = function(){
         $('#loginDiv').style.display = 'block';
@@ -54,18 +69,26 @@ window.onload = function()
         $('#signupDiv').style.display = 'block';
     }
 
+    $('#slattbratha').onclick = function(){
+        logout();
+    }
+
     $('#loginBtn').onclick = function(){
         login($('#email').value, $('#password').value)
         .catch(err => $('.error').innerText =err.message);
     }
 
     $('#registerBtn').onclick = function(){
-        login($('#emailReg').value, $('#passwordReg').value)
-        .catch(err => $('.error').innerText =err.message);
+        signup( $('#emailReg').value, $('#passwordReg').value )
+        .catch( err => $('.error').innerText = err.message );
     }
 
     $('#addCommentBtn').onclick = function(){
-        addComment($('#newComment').value)
-        .catch(err => $('.error').innerText =err.message);
+        addComment( $('#newComment').value )
+        .then( () => {
+            createComment({comment: $('#newComment').value});
+            $('#newComment').value = '';
+        })
+        .catch( err => $('.error').innerText = err.message )
     }
 }
